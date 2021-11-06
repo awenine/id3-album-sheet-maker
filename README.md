@@ -1,0 +1,1 @@
+A pipeline to read album data from id3 tags of folders of mp3s and write this to Google sheets.

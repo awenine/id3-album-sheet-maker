@@ -1,0 +1,11 @@
+{
+  "name": "id3-album-sheet-maker",
+  "version": "1.0.0",
+  "description": "A pipeline to read album data from folders of mp3s and write to a Google sheets database.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Christopher Owen",
+  "license": "ISC"
+}
