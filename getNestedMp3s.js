@@ -9,7 +9,7 @@ const fs = require('fs')
  * other file structures will need different parsing methods
  */ 
 
-const getNestedMp3s = function (rootFolder) {
+function getNestedMp3s (rootFolder) {
   let infoFolders = []
 
   const releaseFolders = fs.readdirSync(rootFolder)
