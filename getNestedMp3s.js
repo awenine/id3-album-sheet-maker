@@ -23,16 +23,20 @@ const getNestedMp3s = function (rootFolder) {
     })
 
   releaseFolders.forEach(folder => {
-    const items = fs.readdirSync(folder)
+    const items = fs.readdirSync(folder).map(releaseFolder => `${folder}/${releaseFolder}`)
     let output = items;
-    const nestedDirs = items.filter(item => fs.statSync(`${folder}/${item}`).isDirectory())
-  
-    if (nestedDirs.length > 0) {
-      output = nestedDirs.flatMap(dir => fs.readdirSync(`${folder}/${dir}`))
-    }
     const mp3s = output.filter(file => file.slice(-4) === '.mp3')
-
     if (mp3s.length) infoFolders.push(mp3s)
+    else {
+      const nestedDirs = items.filter(item => fs.statSync(item).isDirectory())
+
+      if (nestedDirs.length) {
+        output = nestedDirs.flatMap(dir => fs.readdirSync(`${dir}`).map(item => `${dir}/${item}`))
+      }
+      const nestedMp3s = output.filter(file => file.slice(-4) === '.mp3')
+      
+      if (nestedMp3s.length) infoFolders.push(nestedMp3s)
+    }
   })
 
   return infoFolders
