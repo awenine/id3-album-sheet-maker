@@ -1,6 +1,7 @@
 require('dotenv').config();
 const readline = require('readline');
 const {google} = require('googleapis');
+const log = require('./utils/log');
 
 function createSheets(auth, data, getSheetConfig) {
   //* get catalogue numbers (stored in comments) to create sheets
@@ -24,7 +25,7 @@ function createSheets(auth, data, getSheetConfig) {
   sheets.spreadsheets.batchUpdate(sheetRequest, (err, res) => {
     if (err) return console.log('The API returned an error: ' + err);
     const result = res.result;
-    console.log("sheets created, result: ",result);
+    log(`Sheets created, result: ${result}`);
   });
   //* write cells with config
 
