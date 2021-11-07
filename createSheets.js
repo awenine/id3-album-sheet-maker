@@ -1,9 +1,8 @@
 require('dotenv').config();
-const readline = require('readline');
 const {google} = require('googleapis');
 const log = require('./utils/log');
 
-function createSheets(auth, data, getSheetConfig) {
+function createSheets(auth, data, getSheetConfig, getWriteCellsConfig) {
   //* get catalogue numbers (stored in comments) to create sheets
   const sheetTitles = data.map(release => release[0].comment.text)
   //* define sheets with authorization 
@@ -22,14 +21,25 @@ function createSheets(auth, data, getSheetConfig) {
     },
     auth,
   }
-  sheets.spreadsheets.batchUpdate(sheetRequest, (err, res) => {
-    if (err) return console.log('The API returned an error: ' + err);
-    const result = res.result;
+  sheets.spreadsheets.batchUpdate(sheetRequest, (error, response) => {
+    if (error) return console.log('The API returned an error when creating sheets: ' + error);
+    const result = response.result;
     log(`Sheets created, result: ${result}`);
   });
   //* write cells with config
-
-
+  const writeCellsRequest = {
+    spreadsheetId: process.env.SHEET_ID,
+    resource: {
+      valueInputOption: 'RAW', // can use 'USER_ENTERED' if we want sheets to parse data, ie for formulas, dates etc
+      data: data.map(release => getWriteCellsConfig(release)),
+    },
+    auth,
+  }
+  sheets.spreadsheets.values.batchUpdate(writeCellsRequest, (error, response) => {
+    if (error) return console.log('The API returned an error when writing cells: ' + error);
+    const result = response.result;
+    log(`Values written, result: ${result}`);
+  })
 }
 
 module.exports = createSheets

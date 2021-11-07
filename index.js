@@ -6,6 +6,7 @@ const id3TagConfig = require('./id3TagConfig');
 const returnID3Tags = require('./returnID3Tags');
 const getSheetConfig = require('./getSheetConfig');
 const log = require('./utils/log');
+const getWriteCellsConfig = require('./getWriteCellsConfig');
 
 const id3TagFolders = 
   getNestedMp3s(process.env.MP3_ROOT_FOLDER)
@@ -16,6 +17,4 @@ const id3TagFolders =
       return tags
     })
 
-authorizeAndRunSheetScript(createSheets,id3TagFolders,getSheetConfig) // to test
-
-// console.log("id3TagFolders: ",id3TagFolders.map(release => release.map(track => track.comment.)));
+authorizeAndRunSheetScript(createSheets,id3TagFolders,getSheetConfig, getWriteCellsConfig)

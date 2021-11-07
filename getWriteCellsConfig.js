@@ -1,3 +1,5 @@
+const {google} = require('googleapis');
+
 function getWriteCellsConfig(releaseData) {
   const releaseFormat = [  
     [ // Column A
@@ -21,8 +23,8 @@ function getWriteCellsConfig(releaseData) {
   });
 
   return {
-      range: `${releaseData[0].comment.text}!`,
-      majorDimension = 'COLUMNS',
+      range: `'${releaseData[0].comment.text}'!A:B`,  //Defines sheet and position of data. NOTE - sheet name wrapped in '' so can parse alphanumeric combination, spaces & special characters.
+      majorDimension: "COLUMNS",
       values: releaseFormat
   }
 }
