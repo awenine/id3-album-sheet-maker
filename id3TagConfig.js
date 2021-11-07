@@ -2,9 +2,9 @@
 // for full glossary see: https://www.npmjs.com/package/node-id3
 
 const id3TagConfig = {
-  // include: ['TALB', 'TIT2'],    // only read the specified tags (default: all)
+  // include: ['comment'],    // only read the specified tags (default: all)
   exclude: ['APIC'],            // don't read the specified tags (default: [])
-  // onlyRaw: false,               // only return raw object (default: false)
+  // onlyRaw: true,               // only return raw object (default: false)
   noRaw: true                  // don't generate raw object (default: false)
 }
 

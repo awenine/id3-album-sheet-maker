@@ -6,7 +6,7 @@ const { release } = require('os');
 
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets']; //* for writing
 
-function  authorizeAndRunSheetScript(script) {
+function  authorizeAndRunSheetScript(script, ...scriptArgs) {
   // The token file defined in .env stores the user's access and refresh tokens, and is
   // created automatically when the authorization flow completes for the first
   // time.
@@ -15,7 +15,7 @@ function  authorizeAndRunSheetScript(script) {
   fs.readFile(process.env.CREDENTIALS, (err, content) => {
     if (err) return console.log('Error loading client secret file:', err);
     // Authorize a client with credentials, then call the Google Sheets API.
-    authorize(JSON.parse(content), script);
+    authorize(JSON.parse(content), script, ...scriptArgs);
   });
 }
 
@@ -26,15 +26,15 @@ function  authorizeAndRunSheetScript(script) {
  * @param {function} callback The callback to call with the authorized client.
  */
 
-function authorize(credentials, callback) {
+function authorize(credentials, callback, ...callbackArgs) {
   const {client_secret, client_id, redirect_uris} = credentials.installed;
   const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
 
   // Check if we have previously stored a token.
   fs.readFile(process.env.TOKEN, (err, token) => {
-    if (err) return getNewToken(oAuth2Client, callback);
+    if (err) return getNewToken(oAuth2Client, callback, ...callbackArgs);
     oAuth2Client.setCredentials(JSON.parse(token));
-    callback(oAuth2Client);
+    callback(oAuth2Client, ...callbackArgs);
   });
 }
 
@@ -45,7 +45,7 @@ function authorize(credentials, callback) {
  * @param {getEventsCallback} callback The callback for the authorized client.
  */
 
-function getNewToken(oAuth2Client, callback) {
+function getNewToken(oAuth2Client, callback, ...callbackArgs) {
   const authUrl = oAuth2Client.generateAuthUrl({
     access_type: 'offline',
     scope: SCOPES,
@@ -61,11 +61,11 @@ function getNewToken(oAuth2Client, callback) {
       if (err) return console.error('Error while trying to retrieve access token', err);
       oAuth2Client.setCredentials(token);
       // Store the token to disk for later program executions
-      fs.writeFile(TOKEN_PATH, JSON.stringify(token), (err) => {
+      fs.writeFile(process.env.TOKEN, JSON.stringify(token), (err) => {
         if (err) return console.error(err);
         console.log('Token stored to', process.env.TOKEN);
       });
-      callback(oAuth2Client);
+      callback(oAuth2Client, ...callbackArgs);
     });
   });
 }
