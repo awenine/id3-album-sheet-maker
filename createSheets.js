@@ -23,11 +23,11 @@ function createSheets(auth, data, getSheetConfig, getWriteCellsConfig) {
     spreadsheetId: process.env.SHEET_ID,
     resource: {
       valueInputOption: 'RAW', // can use 'USER_ENTERED' if we want sheets to parse data, ie for formulas, dates etc
-      data: data.map(release => getWriteCellsConfig(release)),
+      data: data.map(release => getWriteCellsConfig(release)), // adjust this file to format cell data
     },
     auth,
   }
-
+  //* create sheets with config
   sheets.spreadsheets.batchUpdate(sheetRequest, (error, response) => {
     if (error) return console.log('The API returned an error when creating sheets: ' + error);
     const createResult = response.result;
