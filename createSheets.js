@@ -3,11 +3,9 @@ const {google} = require('googleapis');
 const log = require('./utils/log');
 
 function createSheets(auth, data, getSheetConfig, getWriteCellsConfig) {
-  //* get catalogue numbers (stored in comments) to create sheets
   const sheetTitles = data.map(release => release[0].comment.text)
-  //* define sheets with authorization 
   const sheets = google.sheets({version: 'v4', auth});
-  //* create sheets with config
+
   const sheetRequest = {
     spreadsheetId: process.env.SHEET_ID,
     resource: {
@@ -21,12 +19,6 @@ function createSheets(auth, data, getSheetConfig, getWriteCellsConfig) {
     },
     auth,
   }
-  sheets.spreadsheets.batchUpdate(sheetRequest, (error, response) => {
-    if (error) return console.log('The API returned an error when creating sheets: ' + error);
-    const result = response.result;
-    log(`Sheets created, result: ${result}`);
-  });
-  //* write cells with config
   const writeCellsRequest = {
     spreadsheetId: process.env.SHEET_ID,
     resource: {
@@ -35,11 +27,18 @@ function createSheets(auth, data, getSheetConfig, getWriteCellsConfig) {
     },
     auth,
   }
-  sheets.spreadsheets.values.batchUpdate(writeCellsRequest, (error, response) => {
-    if (error) return console.log('The API returned an error when writing cells: ' + error);
-    const result = response.result;
-    log(`Values written, result: ${result}`);
-  })
+
+  sheets.spreadsheets.batchUpdate(sheetRequest, (error, response) => {
+    if (error) return console.log('The API returned an error when creating sheets: ' + error);
+    const createResult = response.result;
+    log(`Sheets created, result: ${createResult}`);
+    //* write cells with config
+    sheets.spreadsheets.values.batchUpdate(writeCellsRequest, (err, res) => {
+      if (err) return console.log('The API returned an error when writing cells: ' + err);
+      const writeResult = res.result;
+      log(`Values written, result: ${writeResult}`);
+    })
+  });
 }
 
 module.exports = createSheets
