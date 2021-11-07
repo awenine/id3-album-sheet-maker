@@ -18,14 +18,14 @@ function getWriteCellsConfig(releaseData) {
 
   releaseData.forEach((trackData, index) => {
     releaseFormat[0].push(trackData.trackNumber)
-    if (index === 0) releaseFormat[1].push(trackData.artist,trackData.album,trackData.year,trackData.genre,'','');
+    if (index === 0) releaseFormat[1].push(trackData.performerInfo,trackData.album,trackData.year,trackData.genre,'','');
     releaseFormat[1].push(trackData.title)
   });
 
-  const STARTING_POINT = {column: 'D', row: 4} // change starting point of range here
+  const STARTING_POINT = {column: 'B', row: 2} // change starting point of range here
 
   return {
-      range: `'${releaseData[0].comment.text}'!${STARTING_POINT.column}${STARTING_POINT.row}:${incrementLetter(STARTING_POINT.column, releaseFormat.length-1)}${STARTING_POINT.row + releaseFormat[0].length}`,
+      range: `'${releaseData[0].comment.text}'!${STARTING_POINT.column}${+STARTING_POINT.row}:${incrementLetter(STARTING_POINT.column, releaseFormat.length-1)}${+STARTING_POINT.row + releaseFormat[0].length}`,
       majorDimension: "COLUMNS",
       values: releaseFormat
   }

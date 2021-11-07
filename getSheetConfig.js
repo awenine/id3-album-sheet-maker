@@ -9,11 +9,20 @@ function getSheetConfig(sheetTitle) {
     //   object (GridProperties)
     // },
     // "hidden": boolean,
-    // "tabColor": {                  // make colour coding change system (based on index?)
-    //   object (Color)
+    // tabColor: {
+    //   red: 1,
+    //   green: 0.5,
+    //   blue: 0,
+    //   alpha: 1
     // },
-    // "tabColorStyle": {
-    //   object (ColorStyle)
+    // tabColorStyle: {
+    //   // rgbColor: {
+    //   //   red: 1,
+    //   //   green: 0,
+    //   //   blue: 0,
+    //   //   alpha: 1
+    //   // },
+    //   themeColor: 'BACKGROUND'
     // },
     // "rightToLeft": boolean,
     // "dataSourceSheetProperties": {

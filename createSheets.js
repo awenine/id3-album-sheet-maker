@@ -3,7 +3,11 @@ const {google} = require('googleapis');
 const log = require('./utils/log');
 
 function createSheets(auth, data, getSheetConfig, getWriteCellsConfig) {
-  const sheetTitles = data.map(release => release[0].comment.text)
+  const sheetTitles = data.map((release,index) => {
+    if (!release[0].comment) console.log(`release at ${index} has no comment tag`)
+    // log(release[0].comment.text)
+    return release[0].comment.text
+  })
   const sheets = google.sheets({version: 'v4', auth});
 
   const sheetRequest = {
