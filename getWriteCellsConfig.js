@@ -1,4 +1,4 @@
-const {google} = require('googleapis');
+const incrementLetter = require("./utils/incrementLetter");
 
 function getWriteCellsConfig(releaseData) {
   const releaseFormat = [  
@@ -22,8 +22,10 @@ function getWriteCellsConfig(releaseData) {
     releaseFormat[1].push(trackData.title)
   });
 
+  const STARTING_POINT = {column: 'D', row: 4} // change starting point of range here
+
   return {
-      range: `'${releaseData[0].comment.text}'!A:B`,  //Defines sheet and position of data. NOTE - sheet name wrapped in '' so can parse alphanumeric combination, spaces & special characters.
+      range: `'${releaseData[0].comment.text}'!${STARTING_POINT.column}${STARTING_POINT.row}:${incrementLetter(STARTING_POINT.column, releaseFormat.length-1)}${STARTING_POINT.row + releaseFormat[0].length}`,
       majorDimension: "COLUMNS",
       values: releaseFormat
   }
