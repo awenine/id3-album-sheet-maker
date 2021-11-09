@@ -3,7 +3,7 @@
 
 This is a tool to read a directory of folders of mp3 albums and write each album data to a seperate info sheet of a Google Spreadsheet.
 
-<img alt="Screenshot" title="Screenshot of source folder and created sheet"  src="./static/readme_screenshot.png" width="100%"">
+<img alt="Screenshot" title="Screenshot of source folder and created sheet"  src="./static/readme_screenshot.png" width="100%">
 
 it primarily uses:
 - [node id3](https://github.com/Zazama/node-id3) 
