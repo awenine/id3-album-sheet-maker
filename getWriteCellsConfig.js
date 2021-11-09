@@ -26,7 +26,7 @@ function getWriteCellsConfig(releaseData) {
 
   return {
       range: `'${releaseData[0].comment.text}'!${STARTING_POINT.column}${+STARTING_POINT.row}:${incrementLetter(STARTING_POINT.column, releaseFormat.length-1)}${+STARTING_POINT.row + releaseFormat[0].length}`,
-      majorDimension: "COLUMNS",
+      majorDimension: "COLUMNS", // if removed, will default to 'ROWS'
       values: releaseFormat
   }
 }

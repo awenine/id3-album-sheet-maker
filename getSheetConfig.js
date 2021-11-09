@@ -16,12 +16,12 @@ function getSheetConfig(sheetTitle) {
     //   alpha: 1
     // },
     // tabColorStyle: {
-    //   // rgbColor: {
-    //   //   red: 1,
-    //   //   green: 0,
-    //   //   blue: 0,
-    //   //   alpha: 1
-    //   // },
+      // rgbColor: {
+      //   red: 1,
+      //   green: 0,
+      //   blue: 0,
+      //   alpha: 1
+      // },
     //   themeColor: 'BACKGROUND'
     // },
     // "rightToLeft": boolean,
