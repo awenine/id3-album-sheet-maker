@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^10.0.0",
+    "get-mp3-duration": "^1.0.0",
     "googleapis": "^89.0.0",
     "node-id3": "^0.2.3"
   }
