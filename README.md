@@ -1,12 +1,15 @@
 # id3 Album Sheet Maker
-### Archive album and track data on Google Sheets from id3 tags
+### Archive album and track data on Google Sheets from mp3 data
 
-This is a tool to read a directory of folders of mp3 albums and write each album data to a seperate info sheet of a Google Spreadsheet.
+This is a tool to read a directory of folders of mp3 albums and write each album data to a seperate info sheet of a Google Spreadsheet. 
+
+*The script now writes track length and album duration as well as id3 tag data.*
 
 <img alt="Screenshot" title="Screenshot of source folder and created sheet"  src="./static/readme_screenshot.png" width="100%">
 
 it primarily uses:
 - [node id3](https://github.com/Zazama/node-id3) 
+- [get mp3 duration](https://github.com/transitive-bullshit/get-mp3-duration)
 - [Google Sheets API](https://developers.google.com/sheets/api/guides/concepts)
 
 ## Settup and Installation
