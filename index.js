@@ -7,8 +7,6 @@ const returnMp3Data = require('./returnMp3Data');
 const getSheetConfig = require('./getSheetConfig');
 const log = require('./utils/log');
 const getWriteCellsConfig = require('./getWriteCellsConfig');
-const msToParsedTimeObj = require('./utils/msToParsedTimeObj');
-const lengthObjToMiliseconds = require('./utils/lengthObjToMiliseconds');
 
 const id3TagFolders = 
   getNestedMp3s(process.env.MP3_ROOT_FOLDER)

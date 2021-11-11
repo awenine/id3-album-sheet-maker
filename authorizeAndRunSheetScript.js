@@ -2,7 +2,6 @@ require('dotenv').config()
 const fs = require('fs');
 const readline = require('readline');
 const {google} = require('googleapis');
-const log = require('./utils/log');
 
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets']; //* for writing
 
