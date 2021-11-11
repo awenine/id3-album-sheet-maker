@@ -1,10 +1,16 @@
 const incrementLetter = require("./utils/incrementLetter");
+const msToParsedTimeObj = require("./utils/msToParsedTimeObj");
 
 function getWriteCellsConfig(releaseData) {
+  
+  const albumLengthObj = msToParsedTimeObj(releaseData.reduce((acc,item)=> { return acc + item.length.duration},0))
+
+
   const releaseFormat = [  
     [ // Column A
       'Artist',
       'Album',
+      'Length',
       'Year',
       'Genre',
       '',
@@ -12,14 +18,45 @@ function getWriteCellsConfig(releaseData) {
       // after will come track numbers
     ],
     [ // Column B
-      // will be filled according to release data
+      // Length in hours
+      // will be filled according to release data (track titles)
+      releaseData[0].performerInfo,
+      releaseData[0].album,
+      albumLengthObj.hours,
+      releaseData[0].year,
+      releaseData[0].genre,
+      '',
+      ''
+    ],
+    [ // Column C
+      // Length in minutes
+      // will be filled according to release data (minutes)
+      '',
+      '',
+      albumLengthObj.minutes,
+      '',
+      '',
+      '',
+      ''
+    ],
+    [ // Column D
+      // Length in seconds
+      // will be filled according to release data (seconds)
+      '',
+      '',
+      albumLengthObj.seconds,
+      '',
+      '',
+      '',
+      ''
     ]
   ]
 
-  releaseData.forEach((trackData, index) => {
+  releaseData.forEach((trackData) => {
     releaseFormat[0].push(trackData.trackNumber)
-    if (index === 0) releaseFormat[1].push(trackData.performerInfo,trackData.album,trackData.year,trackData.genre,'','');
     releaseFormat[1].push(trackData.title)
+    releaseFormat[2].push(trackData.length.minutes)
+    releaseFormat[3].push(trackData.length.seconds)
   });
 
   const STARTING_POINT = {column: 'B', row: 2} // change starting point of range here
