@@ -32,8 +32,9 @@ This structure is based on my personal collection. To change this, see **Configu
 
 ## Running the script
 First, create a .env file based on the example and populate it with the root mp3 directory and the target google sheet id.  
-In the terminal, run ``node index.js``
+In the terminal, run `npm start`
 The first time this is run, you will need to authorise, Copy the link that appears in the terminal to your browser and authorise with your Google account, and copy and paste the resulting code back into the terminal. After the first time this will create a token for future use.
+The URL link to the resulting sheet should be logged in the terminal upon completion in a pale magenta.
 
 ## Configuration
 This script has been designed to specifically upload my collection of mp3s in the format I wanted. However, it has been seperated into modules to allow for configuration to fit other uses.

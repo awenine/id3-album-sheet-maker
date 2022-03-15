@@ -4,6 +4,7 @@
   "description": "A pipeline to read album data from folders of mp3s and write to a Google sheets database.",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Christopher Owen",

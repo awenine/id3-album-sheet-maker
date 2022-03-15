@@ -18,3 +18,5 @@ const id3TagFolders =
     })
 
 authorizeAndRunSheetScript(createSheets,id3TagFolders,getSheetConfig, getWriteCellsConfig)
+
+console.log("\x1b[1;42m","FINISHED","\x1b[0m","- sheet has been written at:","\x1b[1;35m", `https://docs.google.com/spreadsheets/d/${process.env.SHEET_ID}`,"\x1b[0m")
