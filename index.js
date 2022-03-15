@@ -10,7 +10,7 @@ const getWriteCellsConfig = require('./getWriteCellsConfig');
 
 const id3TagFolders = 
   getNestedMp3s(process.env.MP3_ROOT_FOLDER)
-    .slice(8,13)   //* for getting a smaller range of folders
+    // .slice(8,13)   //* for getting a smaller range of folders
     .map(paths => {
       const tags = returnMp3Data(paths, id3TagConfig)
       log(`${paths[0].split('/')[4]} id3 tags fetched`)
