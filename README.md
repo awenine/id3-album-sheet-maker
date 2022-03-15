@@ -31,8 +31,8 @@ Root Directory
 This structure is based on my personal collection. To change this, see **Configuration**.
 
 ## Running the script
-
-in the terminal, run ``node index.js``
+First, create a .env file based on the example and populate it with the root mp3 directory and the target google sheet id.  
+In the terminal, run ``node index.js``
 The first time this is run, you will need to authorise, Copy the link that appears in the terminal to your browser and authorise with your Google account, and copy and paste the resulting code back into the terminal. After the first time this will create a token for future use.
 
 ## Configuration
@@ -46,4 +46,4 @@ This script has been designed to specifically upload my collection of mp3s in th
 #### Cell Formatting
 `getWriteCellsConfig.js` is where you can define the way the tags are written to specific cells, their orientation and position.
 
-With some adaptation this repo could be a useful starting point for mor sheets-based tasks, ie reading from sheets, so hope its useful, and enjoy! 
+With some adaptation this repo could be a useful starting point for more sheets-based tasks, ie reading from sheets, so hope its useful, and enjoy! 
