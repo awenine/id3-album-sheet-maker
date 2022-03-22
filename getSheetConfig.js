@@ -1,7 +1,15 @@
-function getSheetConfig(sheetTitle) {
+const getCharCodeOfWholeString = (string) => {
+  let outputString = '';
+  for (let i = 0; i < string.length; i++) {
+    outputString += string.split(' ')[0].split('').splice(3).join('').toUpperCase().charCodeAt(i)
+  }
+  return parseInt(outputString)
+} 
+
+function getSheetConfig(sheetTitle, index) {
   //* see: https://developers.google.com/sheets/api/reference/rest/v4/spreadsheets/sheets#SheetProperties for reference
   return {
-    // "sheetId": integer,
+    sheetId: getCharCodeOfWholeString(sheetTitle),
     title: sheetTitle,
     // "index": integer,
     // "sheetType": enum (SheetType),
